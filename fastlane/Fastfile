@@ -25,7 +25,7 @@ lane :pod_repo_push do |options|
   add_git_tag(tag: target_version)
   push_git_tags
   
-  adSource = "https://github.com/AdBanaPro/Specs"
+  adSource = "https://github.com/yushengr/Specs"
   cocoaSource = "https://github.com/CocoaPods/Specs.git"
   pod_push(path: spec_path, repo: target_repo, sources: [adSource, cocoaSource], use_libraries: true, allow_warnings: true)
 end
