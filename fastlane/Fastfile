@@ -2,15 +2,13 @@ default_platform :ios
 
 desc 'Release new pod version'
 
-target_repo    = options[:repo]
-target_project = options[:project]
-target_version = options[:version]
-target_source = options[:source]
-spec_path = "#{target_project}.podspec"
 cocoaSource = "https://github.com/CocoaPods/Specs.git"
 
 lane :git_tag do |options|
 
+  spec_path = "#{target_project}.podspec"
+  target_version = options[:version]
+  
   git_pull
   ensure_git_branch
   version_bump_podspec(path: spec_path, version_number: target_version)
@@ -29,12 +27,24 @@ end
 
 lane :pod_repo_push do |options|
 
+  target_repo    = options[:repo]
+  target_project = options[:project]
+  target_version = options[:version]
+  target_source = options[:source]
+  spec_path = "#{target_project}.podspec"
+
   git_tag
   UI.message("👉 Start release lib #{target_project} new version #{target_version}")
   pod_push(path: spec_path, repo: target_repo, sources: [target_source, cocoaSource], allow_warnings: true)
 end
 
 lane :pod_repo_push_use_libraries do |options|
+  
+  target_repo    = options[:repo]
+  target_project = options[:project]
+  target_version = options[:version]
+  target_source = options[:source]
+  spec_path = "#{target_project}.podspec"
   
   git_tag
   UI.message("👉 Start release lib #{target_project} new version #{target_version}")
