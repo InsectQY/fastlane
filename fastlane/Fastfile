@@ -31,10 +31,12 @@ lane :pod_repo_push do |options|
 
   git_tag
   UI.message("👉 Start release lib #{target_project} new version #{target_version}")
-
   pod_push(path: spec_path, repo: target_repo, sources: [target_source, cocoaSource], allow_warnings: true)
 end
 
 lane :pod_repo_push_use_libraries do |options|
+  
+  git_tag
+  UI.message("👉 Start release lib #{target_project} new version #{target_version}")
   pod_push(path: spec_path, repo: target_repo, sources: [target_source, cocoaSource], use_libraries: true, allow_warnings: true)
 end
